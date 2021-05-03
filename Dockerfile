@@ -34,7 +34,9 @@ RUN git clone https://github.com/Z3Prover/z3.git z3 && \
 
 # super_prove
 RUN ln -s /lib/x86_64-linux-gnu/libreadline.so.7 /lib/x86_64-linux-gnu/libreadline.so.6
-RUN wget https://github.com/sterin/super-prove-build/releases/download/hwmcc20-2/super_prove-hwmcc20-2-Ubuntu_18.04-Release.tar.gz
+RUN mkdir /usr/local/super_prove && cd /usr/local/super_prove && \
+    wget https://github.com/sterin/super-prove-build/releases/download/hwmcc20-2/super_prove-hwmcc20-2-Ubuntu_18.04-Release.tar.gz && \
+    tar xf super_prove-hwmcc20-2-Ubuntu_18.04-Release.tar.gz
 RUN echo '#!/bin/bash' > /usr/local/bin/suprove ; \
     echo 'tool=super_prove; if [ "$1" != "${1#+}" ]; then tool="${1#+}"; shift; fi' >> /usr/local/bin/suprove ; \
     echo 'exec /usr/local/super_prove/bin/${tool}.sh "$@"' >> /usr/local/bin/suprove ; \
