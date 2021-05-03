@@ -58,8 +58,9 @@ RUN git clone https://github.com/boolector/boolector && \
 
 # Btor2Tools
 RUN git clone https://github.com/Boolector/btor2tools && \
-    cd btor2tools && ./configure.sh && cd build && make && \
-    mv bin/btorsim /usr/local/bin/btorsim
+    cd btor2tools && ./configure.sh --static && cd build && make && \
+    cp bin/btorsim /usr/local/bin/btorsim && \
+    cp lib/* /usr/local/lib
 
 ENTRYPOINT ["/usr/local/bin/sby"]
 
